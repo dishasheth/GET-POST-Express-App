@@ -1,0 +1,126 @@
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+    <title>ZuluInc Assignment</title>
+        <script type="text/javascript" src="//code.jquery.com/jquery-1.12.4.min.js"></script> 
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.0/js/dataTables.responsive.min.js"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.0/js/responsive.bootstrap.min.js"></script> 
+        <script src="public/scripts/angular-datatables.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script src="public/js/indexCtrl.js"></script>
+
+        <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.0/css/responsive.bootstrap.min.css">
+
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $('#example').DataTable();
+            });
+        </script>
+    </head>
+    <body ng-app="mainApp" ng-controller="mainApp as vm" style="font-size:9px;">
+    <br><br>
+    <div class="col-md-offset-1 col-md-10">
+       <table id="example" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%" datatable="ng" dt-options="dtOptions">
+            <thead>
+                <tr>
+                    <th>Req. ID</th>
+                    <th>Name</th>
+                    <th>E-mail</th>
+                    <th>Gender</th>
+                    <th>Age</th>
+                    <th>Req_utctime</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="x in vm.requests">
+                    <td>{{x.req_id}}</td>
+                    <td>{{x.name}}</td>
+                    <td>{{x.email}}</td>
+                    <td>{{x.gender}}</td>
+                    <td>{{x.age}}</td>
+                    <td>{{x.req_utctime}}</td>
+                    <td>{{x.status}}</td>
+                </tr>
+            </tbody>
+        </table> 
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Add new request</button>
+        <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+        <div class="modal-content">
+        <form method="post" name="myForm" ng-submit="newRequest(myForm.$valid)" novalidate>
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Add new request</h4>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+                <label class="col-md-3 control-label" for="demo-text-input">Req. ID :</label>
+                <div class="col-md-9">
+                    <input type="text" id="demo-text-input" name="reqid" class="form-control" placeholder="Req. ID.." ng-model="new_reqid" required>
+                    <label ng-show="myForm.reqid.$invalid" ng-if="myForm.reqid.$touched" style="color: red">Please enter req ID.</label>
+                    <br>
+                </div>
+            </div>
+
+            <div class="row">
+                <label class="col-md-3 control-label" for="demo-text-input">Name :</label>
+                <div class="col-md-9">
+                    <input type="text" id="demo-text-input" name="name" class="form-control" placeholder="Name.." ng-model="new_name" required>
+                    <label ng-show="myForm.name.$invalid" ng-if="myForm.name.$touched" style="color: red">Please enter name.</label>
+                    <br>
+                </div>
+
+            </div>
+
+            <div class="row">
+                <label class="col-md-3 control-label" for="demo-textarea-input">E-mail :</label>
+                <div class="col-md-9">
+                <input type="text" id="demo-text-input" name="email" class="form-control" placeholder="E-mail.." ng-model="new_email" required>
+                <label ng-show="myForm.email.$invalid" ng-if="myForm.email.$touched" style="color: red">Please enter e-mail.</label>
+                    <br>
+                </div>
+            </div>
+
+            <div class="row">
+                <label class="col-md-3 control-label" for="demo-text-input">Gender :</label>
+                <div class="col-md-9">
+                  <select class="form-control" ng-model="new_gender">
+                    <option selected="true">Male</option>
+                    <option>Female</option>
+                  </select>
+                    <label ng-show="myForm.gender.$invalid" ng-if="myForm.gender.$touched" style="color: red">Please enter gender.</label>
+                    <br>
+                </div>
+
+            </div>
+
+            <div class="row">
+                <label class="col-md-3 control-label" for="demo-text-input">Age :</label>
+                <div class="col-md-9">
+                    <input type="text" id="demo-text-input" class="form-control" placeholder="Age.." ng-model="new_age" name="new_age" required>
+                    <label ng-show="myForm.new_age.$invalid" ng-if="myForm.new_age.$touched" style="color: red">Please enter age.</label>
+                    <br>
+                </div>
+
+            </div>
+          </div>
+          <div class="modal-footer">
+          <button class="btn btn-default btn-primary">Save</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+    </form>
+
+
+        </div>
+
+      </div>
+    </div>
+    </div>
+    </body>
+    </html>
